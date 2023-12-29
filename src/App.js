@@ -20,8 +20,10 @@ import Home from "./routes/Home";
 import Detail from "./routes/Detail";
 
 function App() {
+    const baseName = document.location.host.indexOf('github.io') > -1 ? process.env.PUBLIC_URL : '';
+
     return (
-        <Router>
+        <Router basename={baseName}>
             <Routes>
                 <Route path={'/hello'} element={
                     <h1>Hello</h1>
