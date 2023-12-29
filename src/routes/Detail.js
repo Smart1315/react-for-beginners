@@ -1,5 +1,7 @@
 import {Link, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
+import homeStyles from "./Home.module.css";
+import styles from "../components/Movie.module.css";
 
 function Detail() {
     const {id} = useParams();
@@ -18,15 +20,20 @@ function Detail() {
     }, []);
 
     return (
-        <>
-            {loading ? <h1>Loading...</h1> :
-                <div>
+        <div className={homeStyles.container}>
+            {loading ?
+                <div className={homeStyles.loader}>
+                    <span>Loading...</span>
+                </div>
+                :
+                <div className={homeStyles.movies}>
                     <h1>Detail</h1>
                     <div>
-                        <img src={movie.medium_cover_image} alt={movie.title}/>
+                        <img src={movie.medium_cover_image} alt={movie.title} className={styles.movie__img}/>
                         <h2>{movie.title}</h2>
+                        <h3 className={styles.movie__year}>{movie.year}</h3>
                         <p>{movie.description_full}</p>
-                        <ul>
+                        <ul className={styles.movie__genres}>
                             {movie.genres.map((g) => (
                                 <li key={g}>{g}</li>
                             ))}
@@ -34,7 +41,7 @@ function Detail() {
                     </div>
                 </div>
             }
-        </>
+        </div>
     );
 }
 
